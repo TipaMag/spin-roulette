@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./fonts/stylesheet.css">
+    <title>roulete</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="smoke"></div>
+        <img class="man" src="./img/man.png" alt="man-img">
+        
+
+        <div class="wheel">
+            <div class="wheel-arrow"></div>
+            <div class="wheel-spin"></div>
+
+            <div class="btn-container">
+                <button class="btn">крутить</button>
+            </div>
+        </div>
+
+        <div class="icons">
+            <img src="./img/icon.png" alt="icons">
+        </div>
+
+        <div class="modal">
+            <p>БОНУС<br/><span>100%</span></p>
+            <span>НА ПЕРВЫЙ ДЕПОЗИТ<br/>+ 50 ФРИСПИНОВ</span>
+
+            <a href="#">ЗАБРАТЬ</a>
+        </div>
+    </div>
+</body>
+
+<script>
+    const manBg = document.querySelector('.man')
+    const smokeBg = document.querySelector('.smoke')
+    
+    window.addEventListener('mousemove', function(e) {
+        let x = e.clientX / window.innerWidth;
+        let y = e.clientY / window.innerHeight;
+        // manBg.style.transform = 'translateX(-' + x * 25 + 'px)';
+        smokeBg.style.transform = 'translate(-' + x * 25 + 'px, -' + y * 25 + 'px)';;
+    })
+
+    const wheelSpin = document.querySelector('.wheel-spin')
+    const btn = document.querySelector('.btn')
+    const modal = document.querySelector('.modal')
+
+    window.onload = () => {
+        const sectionCount = 18
+        const elemDeg = 360 / sectionCount
+        const randomElem = Math.floor(Math.random()*sectionCount)
+
+        const startDeg = elemDeg * randomElem
+        console.log(startDeg)
+        wheelSpin.style.transition = `transform ease 0s`
+        wheelSpin.style.transform = `rotate(${startDeg}deg)`
+    }
+
+    btn.addEventListener('click', () => {
+        wheelSpin.style.transition = `transform ease 5s`
+        wheelSpin.style.transform = 'rotate(3600deg)'
+
+        setTimeout(() => openModal(), 5500)
+    })
+
+    const openModal = () => {
+        modal.style.visibility = 'visible'
+        modal.style.top = '50%'
+    }
+</script>
+</html>
